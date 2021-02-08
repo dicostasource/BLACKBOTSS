@@ -7770,8 +7770,13 @@ data,res = https.request('https://black-source.tk/BlackTeAM/audios.php')
 if res == 200 then
 audios = json:decode(data)
 if audios.Info == true then
+local Text ='⌔︙تم اختيار المقطع الصوتي لك'
+keyboard = {} 
+keyboard.inline_keyboard = {
+{{text = '- Black TeAM .',url="t.me/FBBBBB"}},
+}
 local msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..token..'/sendVoice?chat_id=' .. msg.chat_id_ .. '&voice=' .. URL.escape(audios.info).."&reply_to_message_id="..msg_id.."&parse_mode=markdown)
+https.request("https://api.telegram.org/bot"..token..'/sendVoice?chat_id=' .. msg.chat_id_ .. '&voice='..URL.escape(audios.info)..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 end
 end
