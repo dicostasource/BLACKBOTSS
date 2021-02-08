@@ -7734,7 +7734,8 @@ data,res = https.request('https://black-source.tk/BlackTeAM/infoInstagram.php?us
 if res == 200 then
 muaed = json:decode(data)
 if muaed.Info == true then
-SendP(msg.chat_id_, msg.id_,muaed.ph, muaed.info) 
+local msg_id = msg.id_/2097152/0.5
+SendP(msg.chat_id_, msg_id,muaed.ph, muaed.info) 
 end
 end
 end
@@ -7769,7 +7770,8 @@ data,res = https.request('https://black-source.tk/BlackTeAM/audios.php')
 if res == 200 then
 audios = json:decode(data)
 if audios.Info == true then
-SendV(msg.chat_id_, msg.id_,audios.info,'⌔︙تم اختيار المقطع الصوتي لك') 
+local msg_id = msg.id_/2097152/0.5
+SendV(msg.chat_id_,msg_id,audios.info,'⌔︙تم اختيار المقطع الصوتي لك') 
 end
 end
 end
