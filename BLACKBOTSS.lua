@@ -253,30 +253,6 @@ persistent_id_ = file}
 end 
 return infile 
 end
-function Addjpg(msg,chat,ID_FILE,File_Name)
-local File = json:decode(https.request('https://api.telegram.org/bot'.. token..'/getfile?file_id='..ID_FILE)) 
-download_to_file('https://api.telegram.org/file/bot'..token..'/'..File.result.file_path,File_Name) 
-sendPhoto(msg.chat_id_, msg.id_, 0, 1, nil,'./'..File_Name,'تم تحويل الملصق الى صوره')     
-os.execute('rm -rf ./'..File_Name) 
-end
-function Addvoi(msg,chat,vi,ty)
-local eq = json:decode(https.request('https://api.telegram.org/bot'.. token..'/getfile?file_id='..vi)) 
-download_to_file('https://api.telegram.org/file/bot'..token..'/'..eq.result.file_path,ty) 
-sendVoice(msg.chat_id_, msg.id_, 0, 1, nil, './'..ty)   
-os.execute('rm -rf ./'..ty) 
-end
-function Addmp3(msg,chat,kkl,ffrr)
-local eer = json:decode(https.request('https://api.telegram.org/bot'.. token..'/getfile?file_id='..kkl)) 
-download_to_file('https://api.telegram.org/file/bot'..token..'/'..eer.result.file_path,ffrr) 
-sendAudio(msg.chat_id_,msg.id_,'./'..ffrr,"@FBBBBB")  
-os.execute('rm -rf ./'..ffrr) 
-end
-function Addsticker(msg,chat,Sd,rre)
-local Qw = json:decode(https.request('https://api.telegram.org/bot'.. token..'/getfile?file_id='..Sd)) 
-download_to_file('https://api.telegram.org/file/bot'..token..'/'..Qw.result.file_path,rre) 
-sendSticker(msg.chat_id_, msg.id_, 0, 1, nil, './'..rre)
-os.execute('rm -rf ./'..rre) 
-end
 function RestrictChat(User_id,Chat_id)
 https.request("https://api.telegram.org/bot"..token.."/restrictChatMember?chat_id="..Chat_id.."&user_id="..User_id)
 end
@@ -561,6 +537,30 @@ file:write(table.concat(respbody))
 file:close() 
 return file_path, code 
 end 
+function Addjpg(msg,chat,ID_FILE,File_Name)
+local File = json:decode(https.request('https://api.telegram.org/bot'.. token..'/getfile?file_id='..ID_FILE)) 
+download_to_file('https://api.telegram.org/file/bot'..token..'/'..File.result.file_path,File_Name) 
+sendPhoto(msg.chat_id_, msg.id_, 0, 1, nil,'./'..File_Name,'تم تحويل الملصق الى صوره')     
+os.execute('rm -rf ./'..File_Name) 
+end
+function Addvoi(msg,chat,vi,ty)
+local eq = json:decode(https.request('https://api.telegram.org/bot'.. token..'/getfile?file_id='..vi)) 
+download_to_file('https://api.telegram.org/file/bot'..token..'/'..eq.result.file_path,ty) 
+sendVoice(msg.chat_id_, msg.id_, 0, 1, nil, './'..ty)   
+os.execute('rm -rf ./'..ty) 
+end
+function Addmp3(msg,chat,kkl,ffrr)
+local eer = json:decode(https.request('https://api.telegram.org/bot'.. token..'/getfile?file_id='..kkl)) 
+download_to_file('https://api.telegram.org/file/bot'..token..'/'..eer.result.file_path,ffrr) 
+sendAudio(msg.chat_id_,msg.id_,'./'..ffrr,"@FBBBBB")  
+os.execute('rm -rf ./'..ffrr) 
+end
+function Addsticker(msg,chat,Sd,rre)
+local Qw = json:decode(https.request('https://api.telegram.org/bot'.. token..'/getfile?file_id='..Sd)) 
+download_to_file('https://api.telegram.org/file/bot'..token..'/'..Qw.result.file_path,rre) 
+sendSticker(msg.chat_id_, msg.id_, 0, 1, nil, './'..rre)
+os.execute('rm -rf ./'..rre) 
+end
 function add_file(msg,chat,ID_FILE,File_Name)
 if File_Name:match('.json') then
 if tonumber(File_Name:match('(%d+)')) ~= tonumber(bot_id) then 
