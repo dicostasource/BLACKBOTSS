@@ -455,9 +455,6 @@ function Reply_Status(msg,user_id,status,text)
 tdcli_function ({ID = "GetUser",user_id_ = user_id},function(arg,data) 
 if data.first_name_ ~= false then
 local UserName = (data.username_ or "Fbbbbb")
-for BLACKBOTSS in string.gmatch(data.first_name_, "[^%s]+") do
-data.first_name_ = BLACKBOTSS
-end
 local NameUser = "[- BLacK 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙بواسطه » ["..data.first_name_.."](T.me/"..UserName..")"
 local NameUserr = "[- BLacK 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙اسم المستخدم » ["..data.first_name_.."](T.me/"..UserName..")"
 if status == "lock" then
@@ -5437,7 +5434,7 @@ local Text = Text:gsub('#id',msg.sender_user_id_)
 local Text = Text:gsub('#edit',message_edit)
 local Text = Text:gsub('#msgs',NumMsg)
 local Text = Text:gsub('#stast',Status_Gps)
-send(msg.chat_id_, msg.id_, Text)
+send(msg.chat_id_, msg.id_,'['..Text..']')
 database:sadd(bot_id.."BLACKBOTSS:Spam:Group"..msg.sender_user_id_,text) 
 end,nil)
 end
