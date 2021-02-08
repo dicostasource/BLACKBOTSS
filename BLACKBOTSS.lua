@@ -7771,7 +7771,7 @@ if res == 200 then
 audios = json:decode(data)
 if audios.Info == true then
 local msg_id = msg.id_/2097152/0.5
-SendV(msg.chat_id_,msg_id,audios.info,'⌔︙تم اختيار المقطع الصوتي لك') 
+https.request("https://api.telegram.org/bot"..token..'/sendVoice?chat_id=' .. msg.chat_id_ .. '&voice=' .. URL.escape(audios.info).."&reply_to_message_id="..msg_id.."&parse_mode=markdown)
 end
 end
 end
