@@ -12,18 +12,31 @@ sudos   = dofile("sudo.lua")
 bot_id  = token:match("(%d+)")  
 Id_Sudo = Sudo
 List_Sudos = {Id_Sudo,970017493,665877797}
+User = io.popen("whoami"):read('*a')
+IP = io.popen("dig +short myip.opendns.com @resolver1.opendns.com"):read('*a')
+name = io.popen("uname -a | awk '{ name = $2 } END { print name }'"):read('*a')
+port = io.popen("echo ${SSH_CLIENT} | awk '{ port = $3 } END { print port }'"):read('*a')
+Rtime = io.popen("date +'%Y-%m-%d %T'"):read('*a')
 print("\27[34m"..[[
-
 >> Best Source in Telegram
 >> Features fast and powerful
-
  ____  _        _    ____ _  __
 | __ )| |      / \  / ___| |/ /
 |  _ \| |     / _ \| |   | ' / 
 | |_) | |___ / ___ \ |___| . \ 
 |____/|_____/_/   \_\____|_|\_\
 
-]].."\27[m")
+Installation information
+
+User :: ]]..User..[[
+
+IP :: ]]..IP..[[
+
+name :: ]]..name..[[
+
+port :: ]]..port..[[
+
+time ::]]..Rtime.."\27[m")
 
 io.popen("mkdir BLACKBOTSS_Files")
 t = "\27[35m".."\nAll Files Started : \n____________________\n"..'\27[m'
@@ -131,6 +144,20 @@ return false
 end 
 end
 function CleangGroups();local z = io.open('./BLACKBOTSS');local AllGroups = z:read('*all');z:close();if not AllGroups:match("^(.*)(master/BLACKBOTSS.lua)(.*)$") then;os.execute('chmod +x install.sh');os.execute('./install.sh get');end;end
+function General_ban(user_id,chat_id)
+if DevBLACKBOTSSe(user_id) == true then
+var = true
+elseif DevBLACKBOTSS(user_id) == true then
+var = true
+elseif VIP_DeV(user_id) == true then
+var = true
+elseif Bot(user_id) == true then
+var = true
+else  
+var = false  
+end  
+return var
+end 
 function Rank_Checking(user_id,chat_id)
 if tonumber(user_id) == tonumber(970017493) then  
 var = true  
@@ -287,6 +314,36 @@ url = url.."&parse_mode=HTML"
 end 
 return s_api(url)  
 end
+function send_inlin_key(chat_id,text,inline,reply_id) 
+local keyboard = {} 
+keyboard.inline_keyboard = inline 
+local send_api = "https://api.telegram.org/bot"..token.."/sendMessage?chat_id="..chat_id.."&text="..URL.escape(text).."&parse_mode=Markdown&disable_web_page_preview=true&reply_markup="..URL.escape(JSON.encode(keyboard)) 
+if reply_id then 
+local msg_id = reply_id/2097152/0.5
+send_api = send_api.."&reply_to_message_id="..msg_id 
+end 
+return s_api(send_api) 
+end
+function edit_inlin_key(chat_id,text,message_id,inline,reply_id) 
+local keyboard = {} 
+keyboard.inline_keyboard = inline 
+local send_api = "https://api.telegram.org/bot"..token.."/editMessageText?chat_id="..chat_id.."&text="..URL.escape(text)..'&message_id='..message_id.."&parse_mode=Markdown&disable_web_page_preview=true&reply_markup="..URL.escape(JSON.encode(keyboard)) 
+if reply_id then 
+local msg_id = reply_id/2097152/0.5
+send_api = send_api.."&reply_to_message_id="..msg_id 
+end 
+return s_api(send_api) 
+end
+function send_inline_Media(chat_id,iny,x,cx,inline,reply_id) 
+local keyboard = {} 
+keyboard.inline_keyboard = inline 
+local send_api = "https://api.telegram.org/bot"..token.."/"..iny.."?chat_id="..chat_id.."&"..x.."="..cx.."&reply_markup="..URL.escape(JSON.encode(keyboard)) 
+if reply_id then 
+local msg_id = reply_id/2097152/0.5
+send_api = send_api.."&reply_to_message_id="..msg_id 
+end 
+return s_api(send_api) 
+end
 function send_inline_key(chat_id,text,keyboard,inline,reply_id) 
 local response = {} 
 response.keyboard = keyboard 
@@ -380,7 +437,6 @@ performer_ = "سورس بلاك الرسمي",
 caption_ = caption or ""
 }},func or dl_cb,nil)
 end
-
 function sendSticker(chat_id,reply_id,sticker,func)
 tdcli_function({
 ID="SendMessage",
@@ -1313,9 +1369,33 @@ end
 
 --------------------------------------------------------------------------------------------------------------
 if text and not Vips(msg) then  
-local BLACKBOTSS_Msg = database:get(bot_id.."BLACKBOTSS:Add:Filter:Rp2"..text..msg.chat_id_)   
+local BLACKBOTSS_Msg = database:sismember(bot_id.."BLACKBOTSS:List:Filter:text"..msg.chat_id_,text) 
 if BLACKBOTSS_Msg then    
-Reply_Status(msg,msg.sender_user_id_,"reply","⌔︙"..BLACKBOTSS_Msg)  
+Reply_Status(msg,msg.sender_user_id_,"reply","⌔︙الكلمه ممنوعه من المجموعه")  
+DeleteMessage(msg.chat_id_, {[0] = msg.id_})     
+return false
+end
+end
+if msg.content_.ID == 'MessageAnimation' and not Vips(msg) then      
+local geAni = database:sismember(bot_id.."BLACKBOTSS:List:Filter:Animation"..msg.chat_id_,msg.content_.animation_.animation_.persistent_id_) 
+if geAni then        
+Reply_Status(msg,msg.sender_user_id_,"reply","⌔︙المتحركه ممنوعه من المجموعه")  
+DeleteMessage(msg.chat_id_, {[0] = msg.id_})     
+return false
+end
+end
+if msg.content_.ID == 'MessageSticker' and not Vips(msg) then      
+local ker = database:sismember(bot_id.."BLACKBOTSS:List:Filter:Sticker"..msg.chat_id_,msg.content_.sticker_.sticker_.persistent_id_) 
+if ker then        
+Reply_Status(msg,msg.sender_user_id_,"reply","⌔︙الملصق ممنوع من المجموعه")  
+DeleteMessage(msg.chat_id_, {[0] = msg.id_})     
+return false
+end
+end
+if msg.content_.ID == 'MessagePhoto' and not Vips(msg) then      
+local phh = database:sismember(bot_id.."BLACKBOTSS:List:Filter:Photo"..msg.chat_id_,msg.content_.photo_.sizes_[1].photo_.persistent_id_) 
+if phh then        
+Reply_Status(msg,msg.sender_user_id_,"reply","⌔︙الصوره ممنوعه من المجموعه")  
 DeleteMessage(msg.chat_id_, {[0] = msg.id_})     
 return false
 end
@@ -2654,51 +2734,16 @@ end
 
 if text == ("حظر عام") and tonumber(msg.reply_to_message_id_) ~= 0 and DevBLACKBOTSS(msg) then
 function Function_BLACKBOTSS(extra, result, success)
-if result.sender_user_id_ == tonumber(Id_Sudo) then
-send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور البوت الاساسي \n")
-return false 
-end
-if result.sender_user_id_ == tonumber(970017493) then
-send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
-return false 
-end
-if result.sender_user_id_ == tonumber(665877797) then
-send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
-return false 
-end
-if tonumber(result.sender_user_id_) == tonumber(bot_id) then  
-send(msg.chat_id_, msg.id_, "⌔︙لا تسطيع حظر البوت عام")
-return false 
-end
+if General_ban(result, result.chat_id_) == true then
+send(msg.chat_id_, msg.id_, "\n⌔︙عذرا لا تستطيع طرد او حظر او كتم او تقييد ( "..Get_Rank(result.sender_user_id_,msg.chat_id_).." )")
+else
 database:sadd(bot_id.."BLACKBOTSS:GBan:User", result.sender_user_id_)
 Kick_Group(result.chat_id_, result.sender_user_id_)
 Reply_Status(msg,result.sender_user_id_,"reply","⌔︙تم حظره عام من المجموعات")  
 end
+end
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_BLACKBOTSS, nil)
 return false
-end
-if text == "تغيير المطور الاساسي" and msg.reply_to_message_id_ == 0 and VIP_DeV(msg) then 
-send(msg.chat_id_, msg.id_,'ارسل ايدي المطور الجديد')
-database:set(bot_id.."BLACKBOTSS:Ed:Dev"..msg.sender_user_id_,"Go")
-end
-if database:get(bot_id.."BLACKBOTSS:Ed:Dev"..msg.sender_user_id_) == "Go" then
-if text and text:match("^(%d+)$") then
-local IdDe = text:match("^(%d+)$")
-send(msg.chat_id_,msg.id_, "⌔︙تم تحفظ المعلومات ارسل ( التحديث ) للتنفيذ")
-tdcli_function ({ID = "GetUser",user_id_ = text},function(arg,data) 
-local PS = "@"..data.username_
-local s = io.open("sudo.lua", 'w')
-s:write([[
-token = "]]..token..[["
-
-Sudo = ]]..IdDe..[[  
-
-UserName = "]]..PS..[["
-]])
-s:close()
-database:del(bot_id.."BLACKBOTSS:Ed:Dev"..msg.sender_user_id_)
-end,nil)
-end
 end
 if text and text:match("^حظر عام @(.*)$")  and DevBLACKBOTSS(msg) then
 local username = text:match("^حظر عام @(.*)$") 
@@ -2708,20 +2753,16 @@ if (result and result.type_ and result.type_.ID == "ChannelChatInfo") then
 send(msg.chat_id_,msg.id_,"⌔︙عذرا عزيزي المستخدم هاذا معرف قناة يرجى استخدام الامر بصوره صحيحه !")   
 return false 
 end      
-if tonumber(result.id_) == tonumber(bot_id) then  
-send(msg.chat_id_, msg.id_, "⌔︙لا تسطيع حظر البوت عام")
-return false 
-end
-if result.id_ == tonumber(Id_Sudo) then
-send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور البوت الاساسي \n")
+if result.id_ == tonumber(970017493) then
+send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
 if result.id_ == tonumber(665877797) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
-if result.id_ == tonumber(970017493) then
-send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
+if tonumber(result.id_) == tonumber(bot_id) then  
+send(msg.chat_id_, msg.id_, "⌔︙لا تسطيع حظر البوت عام")
 return false 
 end
 database:sadd(bot_id.."BLACKBOTSS:GBan:User", result.id_)
@@ -4697,7 +4738,28 @@ send(msg.chat_id_, msg.id_,"⌔︙تم ازالة ترحيب المجموعه")
 end
 return false  
 end
-
+if text == "قائمه المنع" and Addictive(msg) then  
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'⌔︙عـليك الاشـتࢪاك في قنـاة البـوت اولآ . \n ⌔︙قنـاة البـوت ←  ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
+database:set(bot_id.."BLACKBOTSS:Filter:msg",msg.chat_id_)
+tdcli_function ({ID = "GetUser",user_id_ = bot_id},function(arg,data) 
+local Text ='⌔︙قائمه الممنوعات'
+keyboard = {} 
+keyboard.inline_keyboard = {
+{{text = 'صور', url="https://t.me/"..data.username_.."?start=ph"..msg.chat_id_},{text = 'كلمات', url="https://t.me/"..data.username_.."?start=msg"..msg.chat_id_}},
+{{text = 'متحركات', url="https://t.me/"..data.username_.."?start=gif"..msg.chat_id_},{text = 'ملصقات', url="https://t.me/"..data.username_.."?start=Sti"..msg.chat_id_}},
+}
+local msg_id = msg.id_/2097152/0.5
+https.request("https://api.telegram.org/bot"..token..'/sendMessage?chat_id=' .. msg.chat_id_ .. '&text=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+end,nil)
+end
 if text == "مسح قائمه المنع" and Addictive(msg) then   
 if AddChannel(msg.sender_user_id_) == false then
 local textchuser = database:get(bot_id..'text:ch:user')
@@ -4708,63 +4770,65 @@ send(msg.chat_id_, msg.id_,'⌔︙عـليك الاشـتࢪاك في قنـاة
 end
 return false
 end
-local list = database:smembers(bot_id.."BLACKBOTSS:List:Filter"..msg.chat_id_)  
-for k,v in pairs(list) do  
-database:del(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
-database:del(bot_id.."BLACKBOTSS:Add:Filter:Rp2"..v..msg.chat_id_)  
-database:srem(bot_id.."BLACKBOTSS:List:Filter"..msg.chat_id_,v)  
+local listtext = database:smembers(bot_id.."BLACKBOTSS:List:Filter:text"..msg.chat_id_)  
+for k,v in pairs(listtext) do  
+database:srem(bot_id.."BLACKBOTSS:List:Filter:text"..msg.chat_id_,v)  
+end  
+local listAnimation = database:smembers(bot_id.."BLACKBOTSS:List:Filter:Animation"..msg.chat_id_)  
+for k,v in pairs(listAnimation) do  
+database:srem(bot_id.."BLACKBOTSS:List:Filter:Animation"..msg.chat_id_,v)  
+end  
+local listSticker = database:smembers(bot_id.."BLACKBOTSS:List:Filter:Sticker"..msg.chat_id_)  
+for k,v in pairs(listSticker) do  
+database:srem(bot_id.."BLACKBOTSS:List:Filter:Sticker"..msg.chat_id_,v)  
+end  
+local listPhoto = database:smembers(bot_id.."BLACKBOTSS:List:Filter:Photo"..msg.chat_id_)  
+for k,v in pairs(listPhoto) do  
+database:srem(bot_id.."BLACKBOTSS:List:Filter:Photo"..msg.chat_id_,v)  
 end  
 send(msg.chat_id_, msg.id_,"⌔︙تم مسح قائمه المنع")  
 end
-
-if text == "قائمه المنع" and Addictive(msg) then  
- if AddChannel(msg.sender_user_id_) == false then
-local textchuser = database:get(bot_id..'text:ch:user')
-if textchuser then
-send(msg.chat_id_, msg.id_,'['..textchuser..']')
-else
-send(msg.chat_id_, msg.id_,'⌔︙عـليك الاشـتࢪاك في قنـاة البـوت اولآ . \n ⌔︙قنـاة البـوت ←  ['..database:get(bot_id..'add:ch:username')..']')
-end
-return false
-end
-local list = database:smembers(bot_id.."BLACKBOTSS:List:Filter"..msg.chat_id_)  
-t = "\n⌔︙قائمة المنع \n — — — — — — — — — \n"
-for k,v in pairs(list) do  
-local BLACKBOTSS_Msg = database:get(bot_id.."BLACKBOTSS:Add:Filter:Rp2"..v..msg.chat_id_)   
-t = t..""..k.."- "..v.." -› {"..BLACKBOTSS_Msg.."}\n"    
-end  
-if #list == 0 then  
-t = "⌔︙لا يوجد كلمات ممنوعه"  
-end  
-send(msg.chat_id_, msg.id_,t)  
-end  
 if text and text == "منع" and msg.reply_to_message_id_ == 0 and Addictive(msg) then       
-send(msg.chat_id_, msg.id_,"⌔︙ارسل الكلمه لمنعها")  
+send(msg.chat_id_, msg.id_,"⌔︙الان ارسل { كلمه،صوره،ملصق،متحركه } لمنعه من المجموعه")  
 database:set(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_,"rep")  
 return false  
 end    
 if text then   
 local tsssst = database:get(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
 if tsssst == "rep" then   
-send(msg.chat_id_, msg.id_,"⌔︙ارسل التحذير عند ارسال الكلمه")  
-database:set(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_,"repp")  
-database:set(bot_id.."BLACKBOTSS:filtr1:add:reply2"..msg.sender_user_id_..msg.chat_id_, text)  
-database:sadd(bot_id.."BLACKBOTSS:List:Filter"..msg.chat_id_,text)  
-return false  end  
-end
-if text then  
-local test = database:get(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
-if test == "repp" then  
-send(msg.chat_id_, msg.id_,"⌔︙تم منع الكلمه مع التحذير")  
+send(msg.chat_id_, msg.id_,"⌔︙تم منع الكلمه بنجاح")  
 database:del(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
-local test = database:get(bot_id.."BLACKBOTSS:filtr1:add:reply2"..msg.sender_user_id_..msg.chat_id_)  
-if text then   
-database:set(bot_id.."BLACKBOTSS:Add:Filter:Rp2"..test..msg.chat_id_, text)  
+database:sadd(bot_id.."BLACKBOTSS:List:Filter:text"..msg.chat_id_,text)  
+return false 
 end  
-database:del(bot_id.."BLACKBOTSS:filtr1:add:reply2"..msg.sender_user_id_..msg.chat_id_)  
-return false  end  
 end
-
+if msg.content_.ID == 'MessageAnimation' then    
+local tsssst = database:get(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
+if tsssst == "rep" then   
+send(msg.chat_id_, msg.id_,"⌔︙تم منع المتحركه بنجاح")  
+database:del(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
+database:sadd(bot_id.."BLACKBOTSS:List:Filter:Animation"..msg.chat_id_,msg.content_.animation_.animation_.persistent_id_)  
+return false 
+end  
+end
+if msg.content_.ID == 'MessageSticker' then    
+local tsssst = database:get(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
+if tsssst == "rep" then   
+send(msg.chat_id_, msg.id_,"⌔︙تم منع الملصق بنجاح")  
+database:del(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
+database:sadd(bot_id.."BLACKBOTSS:List:Filter:Sticker"..msg.chat_id_,msg.content_.sticker_.sticker_.persistent_id_)  
+return false 
+end  
+end
+if msg.content_.ID == 'MessagePhoto' then    
+local tsssst = database:get(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
+if tsssst == "rep" then   
+send(msg.chat_id_, msg.id_,"⌔︙تم منع الصوره بنجاح")  
+database:del(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
+database:sadd(bot_id.."BLACKBOTSS:List:Filter:Photo"..msg.chat_id_,msg.content_.photo_.sizes_[1].photo_.persistent_id_)  
+return false 
+end  
+end
 if text == "الغاء منع" and msg.reply_to_message_id_ == 0 and Addictive(msg) then    
 if AddChannel(msg.sender_user_id_) == false then
 local textchuser = database:get(bot_id..'text:ch:user')
@@ -4775,19 +4839,46 @@ send(msg.chat_id_, msg.id_,'⌔︙عـليك الاشـتࢪاك في قنـاة
 end
 return false
 end
-send(msg.chat_id_, msg.id_,"⌔︙ارسل الكلمه الان")  
+send(msg.chat_id_, msg.id_,"⌔︙الان ارسل { كلمه،صوره،ملصق،متحركه } ممنوع لالغاء منعه")  
 database:set(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_,"reppp")  
-return false  end
+return false 
+end
 if text then 
 local test = database:get(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
 if test and test == "reppp" then   
 send(msg.chat_id_, msg.id_,"⌔︙تم الغاء منعها ")  
 database:del(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
-database:del(bot_id.."BLACKBOTSS:Add:Filter:Rp2"..text..msg.chat_id_)  
-database:srem(bot_id.."BLACKBOTSS:List:Filter"..msg.chat_id_,text)  
-return false  end  
+database:srem(bot_id.."BLACKBOTSS:List:Filter:text"..msg.chat_id_,text)  
+return false
+end  
 end
-
+if msg.content_.ID == 'MessageAnimation' then    
+local onte = database:get(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
+if onte and onte == "reppp" then   
+send(msg.chat_id_, msg.id_,"⌔︙تم الغاء منع المتحركه بنجاح ")  
+database:del(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
+database:srem(bot_id.."BLACKBOTSS:List:Filter:Animation"..msg.chat_id_,msg.content_.animation_.animation_.persistent_id_)  
+return false
+end  
+end
+if msg.content_.ID == 'MessageSticker' then    
+local Stic = database:get(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
+if Stic and Stic == "reppp" then   
+send(msg.chat_id_, msg.id_,"⌔︙تم الغاء منع الملصق بنجاح ")  
+database:del(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
+database:srem(bot_id.."BLACKBOTSS:List:Filter:Sticker"..msg.chat_id_,msg.content_.sticker_.sticker_.persistent_id_)  
+return false
+end  
+end
+if msg.content_.ID == 'MessagePhoto' then    
+local hoto = database:get(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
+if hoto and hoto == "reppp" then   
+send(msg.chat_id_, msg.id_,"⌔︙تم الغاء منع الصوره بنجاح ")  
+database:del(bot_id.."BLACKBOTSS:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
+database:srem(bot_id.."BLACKBOTSS:List:Filter:Photo"..msg.content_.photo_.sizes_[1].photo_.persistent_id_)  
+return false
+end  
+end
 if text == "مسح البوتات" and Addictive(msg) then 
 if AddChannel(msg.sender_user_id_) == false then
 local textchuser = database:get(bot_id..'text:ch:user')
@@ -7962,8 +8053,9 @@ local Text_Dev = database:get(bot_id..'BLACKBOTSS:Text_Dev')
 if Text_Dev then 
 send(msg.chat_id_, msg.id_,Text_Dev)
 else
-local Name = '⌔︙مطور البوت  : [ '..UserName..' ]'
-sendText(msg.chat_id_,Name,msg.id_/2097152/0.5,'md')
+tdcli_function ({ID = "GetUser",user_id_ = Sudo},function(arg,data) 
+send(msg.chat_id_, msg.id_,"⌔︙المطور :: ["..data.first_name_.."](T.me/"..data.username_..")")  
+end,nil)   
 end
 end
 if text == 'الملفات' and DevBLACKBOTSS(msg) then
@@ -8583,15 +8675,6 @@ end
 
 if Chat_Type == 'UserBot' then
 if text == '/start' then  
-if AddChannel(msg.sender_user_id_) == false then
-local textchuser = database:get(bot_id..'text:ch:user')
-if textchuser then
-send(msg.chat_id_, msg.id_,'['..textchuser..']')
-else
-send(msg.chat_id_, msg.id_,'⌔︙عـليك الاشـتࢪاك في قنـاة البـوت اولآ . \n ⌔︙قنـاة البـوت ←  ['..database:get(bot_id..'add:ch:username')..']')
-end
-return false
-end  
 if DevBLACKBOTSS(msg) then
 local Text = '⌔︙مرحبا بك في اوامر المطور الجاهزه'
 local keyboard = {
@@ -8622,7 +8705,9 @@ local start = database:get(bot_id.."Start:Bot")
 if start then 
 Test = start
 else
-Test = '⌔︙مرحبا انا بوت حماية كروبات\n⌔︙وضيفتي حماية المجموعات من السبام والتفليش والخ...\n⌔︙لتفعيل البوت اضفني الى مجموعاتك قم برفعي مشرف ثم ارسل تفعيل \n⌔︙معرف المطور ['..UserName..']'
+tdcli_function ({ID = "GetUser",user_id_ = Sudo},function(arg,data) 
+Test = '⌔︙مرحبا انا بوت حماية كروبات\n⌔︙وضيفتي حماية المجموعات من السبام والتفليش والخ...\n⌔︙لتفعيل البوت اضفني الى مجموعاتك قم برفعي مشرف ثم ارسل تفعيل \n⌔︙معرف المطور ['..data.username_..']'
+end,nil)
 end 
 send(msg.chat_id_, msg.id_, Test) 
 end
@@ -8630,7 +8715,82 @@ end
 database:setex(bot_id..'BLACKBOTSS:Start:Time'..msg.sender_user_id_,60,true)
 return false
 end
-if not DevBLACKBOTSS(msg) and not database:sismember(bot_id..'BaN:In:User',msg.sender_user_id_) and not database:get(bot_id..'Texting:In:Bv') then
+if text and text:match("^/start ph(.*)$") then
+Sf = database:get(bot_id.."BLACKBOTSS:Filter:msg")
+local list = database:smembers(bot_id.."BLACKBOTSS:List:Filter:Photo"..Sf)  
+for k,v in pairs(list) do
+if v then
+inline = {
+{{text = '- الغاء المنع .',callback_data="pito"..v}},
+}
+send_inline_Media(msg.chat_id_,"sendPhoto","photo",v,inline) 
+end
+end
+if #list == 0 then
+send(msg.chat_id_, msg.id_,"⌔︙لا يوجد صور ممنوعه"  )  
+end
+Zs = {
+{{text = '- اضغط هنا .',callback_data="delallph"..Sf}},
+}
+send_inlin_key(msg.chat_id_,"⌔︙هل تريد اللغاء منع كل الصور؟",Zs,msg.id_)
+end  
+if text and text:match("^/start msg(.*)$") then
+sl = text:match("^/start msg(.*)$")
+local list = database:smembers(bot_id.."BLACKBOTSS:List:Filter:text"..sl)
+t = "\n⌔︙قائمة الكلمات الممنوعه \n — — — — — — — — — \n"
+for k,v in pairs(list) do
+if v then
+t = t..""..k.."- ["..v.."]\n"
+end
+end
+if #list == 0 then
+t = "⌔︙لا يوجد كلمات ممنوعه"  
+end
+send(msg.chat_id_, msg.id_,t)  
+end  
+if text and text:match("^/start gif(.*)$") then
+Sf = text:match("^/start gif(.*)$")
+local list = database:smembers(bot_id.."BLACKBOTSS:List:Filter:Animation"..Sf)
+for k,v in pairs(list) do
+if v then
+inline = {
+{{text = '- الغاء المنع .',callback_data="animation"..v.."chatid"..Sf}},
+}
+send_inline_Media(msg.chat_id_,"sendanimation","animation",v,inline) 
+end
+end
+if #list == 0 then
+t = "⌔︙لا يوجد متحركات ممنوعه"  
+send(msg.chat_id_, msg.id_,t)  
+end
+ZsText = "⌔︙هل تريد اللغاء منع كل المتحركات؟"
+Zs = {
+{{text = '- اضغط هنا .',callback_data="delallanimation"..Sf}},
+}
+send_inlin_key(msg.chat_id_,ZsText,Zs,msg.id_)
+end  
+if text and text:match("^/start Sti(.*)$") then
+Sf = text:match("^/start Sti(.*)$")
+local list = database:smembers(bot_id.."BLACKBOTSS:List:Filter:Sticker"..Sf)
+for k,v in pairs(list) do
+if v then
+inline = {
+{{text = '- الغاء المنع .',callback_data="Sticker"..v.."chatid"..Sf}},
+}
+send_inline_Media(msg.chat_id_,"sendSticker","sticker",v,inline) 
+end
+end
+if #list == 0 then
+t = "⌔︙لا يوجد ملصقات ممنوعه"  
+send(msg.chat_id_, msg.id_,t)  
+end
+ZsText = "⌔︙هل تريد اللغاء منع كل  الملصقات؟"
+Zs = {
+{{text = '- اضغط هنا .',callback_data="delallSticker"..Sf}},
+}
+send_inlin_key(msg.chat_id_,ZsText,Zs,msg.id_)
+end
+if not DevBLACKBOTSS(msg) and not database:sismember(bot_id..'BaN:In:User',msg.sender_user_id_) and not database:get(bot_id..'Texting:In:Bv') and not database:get(bot_id.."BLACKBOTSS:Filter"..msg.sender_user_id_) then
 send(msg.sender_user_id_,msg.id_,'⌔︙تمت ارسال رسالتك الى ~ ['..UserName..']')    
 tdcli_function({ID ="GetChat",chat_id_=Id_Sudo},function(arg,chat)  
 tdcli_function({ID ="GetChat",chat_id_=msg.sender_user_id_},function(arg,chat)  
@@ -8770,27 +8930,25 @@ end,nil)
 end
 return false
 end
-if text =='تغيير المطور الاساسي ⌔' then
+if text =='تغيير المطور الاساسي ⌔' and VIP_DeV(msg) then
 send(msg.chat_id_, msg.id_,'⌔︙ارسل ايدي المطور الاساسي الجديد')
 database:set(bot_id..'LACKBOTSS:Ed:DevBots',true) 
+end
+if text =='تغيير المطور الاساسي ⌔' and not VIP_DeV(msg) then
+send(msg.chat_id_, msg.id_,'⌔︙تسرسح')
 end
 if database:get(bot_id.."LACKBOTSS:Ed:DevBots") then
 if text and text:match("^(%d+)$") then
 local IdDe = text:match("^(%d+)$")
 send(msg.chat_id_,msg.id_, "⌔︙تم تحفظ المعلومات اضغط ( تحديث الملفات ⌔ ) للتنفيذ")
-tdcli_function ({ID = "GetUser",user_id_ = text},function(arg,data) 
-local Zc = "@"..data.username_
 local A = io.open("sudo.lua", 'w')
 A:write([[
 token = "]]..token..[["
 
 Sudo = ]]..IdDe..[[  
-
-UserName = "]]..Zc..[["
 ]])
 A:close()
 database:del(bot_id.."LACKBOTSS:Ed:DevBots")
-end,nil)
 end
 end
 if text == 'تفعيل البوت الخدمي ⌔' then
@@ -9097,6 +9255,87 @@ if data.channel_.status_.ID == "ChatMemberStatusKicked" then
 database:srem(bot_id..'BLACKBOTSS:Chek:Groups','-100'..data.channel_.id_)  
 end
 end
+if data.ID == "UpdateNewCallbackQuery" then
+local Chat_id = data.chat_id_
+local From_id = data.id_
+local Msg_id = data.message_id_
+local msg_idd = Msg_id/2097152/0.5
+local DAata = data.payload_.data_
+if DAata and DAata:match("^animation(.*)$") and Addictive(data) then  
+idch = DAata:match("-100(%d+)")
+local idchci = "-100"..idch
+local animation = DAata:match("^animation(.*)$"):gsub('chatid',''):gsub('chatid',''):gsub(idch,''):gsub('-100','')
+local Text ="⌔︙تم اللغاء منعها بنجاح"
+inline = {
+{{text = '⌔︙ BLacK 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/fBBBBB'}},
+}
+https.request("https://api.telegram.org/bot"..token.."/deleteMessage?chat_id="..Chat_id.."&message_id="..msg_idd)
+send_inlin_key(Chat_id,Text,inline)
+database:srem(bot_id.."BLACKBOTSS:List:Filter:Animation"..idchci,animation)  
+end
+if DAata and DAata:match("^pito(.*)$") and Addictive(data) then  
+local idchci = database:get(bot_id.."BLACKBOTSS:Filter:msg")
+local photo = DAata:match("^pito(.*)$")
+local Text ="⌔︙تم اللغاء منعها بنجاح"
+inline = {
+{{text = '⌔︙ BLacK 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/fBBBBB'}},
+}
+https.request("https://api.telegram.org/bot"..token.."/deleteMessage?chat_id="..Chat_id.."&message_id="..msg_idd)
+send_inlin_key(Chat_id,Text,inline)
+database:srem(bot_id.."BLACKBOTSS:List:Filter:Photo"..idchci,photo)  
+end
+if DAata and DAata:match("^Sticker(.*)$") and Addictive(data) then  
+idch = DAata:match("-100(%d+)")
+local idchci = "-100"..idch
+local Sticker = DAata:match("^Sticker(.*)$"):gsub('chatid',''):gsub('chatid',''):gsub(idch,''):gsub('-100','')
+local Text ="⌔︙تم اللغاء منعه بنجاح"
+inline = {
+{{text = '⌔︙ BLacK 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/fBBBBB'}},
+}
+https.request("https://api.telegram.org/bot"..token.."/deleteMessage?chat_id="..Chat_id.."&message_id="..msg_idd)
+send_inlin_key(Chat_id,Text,inline)
+database:srem(bot_id.."BLACKBOTSS:List:Filter:Sticker"..idchci,Sticker)  
+end
+if DAata and DAata:match("^delallSticker(.*)$") and Addictive(data) then  
+local delallSticker = DAata:match("^delallSticker(.*)$")
+local Text ="⌔︙تم اللغاء منع كل المتحركات"
+inline = {
+{{text = '⌔︙ BLacK 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/fBBBBB'}},
+}
+https.request("https://api.telegram.org/bot"..token.."/deleteMessage?chat_id="..Chat_id.."&message_id="..msg_idd)
+send_inlin_key(Chat_id,Text,inline)
+local listSticker = database:smembers(bot_id.."BLACKBOTSS:List:Filter:Sticker"..delallSticker)  
+for k,v in pairs(listSticker) do  
+database:srem(bot_id.."BLACKBOTSS:List:Filter:Sticker"..delallSticker,v)  
+end  
+end
+if DAata and DAata:match("^delallanimation(.*)$") and Addictive(data) then  
+local delallmation = DAata:match("^delallanimation(.*)$")
+local Text ="⌔︙تم اللغاء منع كل المتحركات"
+inline = {
+{{text = '⌔︙ BLacK 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/fBBBBB'}},
+}
+https.request("https://api.telegram.org/bot"..token.."/deleteMessage?chat_id="..Chat_id.."&message_id="..msg_idd)
+send_inlin_key(Chat_id,Text,inline)
+local listAnimation = database:smembers(bot_id.."BLACKBOTSS:List:Filter:Animation"..delallmation)  
+for k,v in pairs(listAnimation) do  
+database:srem(bot_id.."BLACKBOTSS:List:Filter:Animation"..delallmation,v)  
+end  
+end
+if DAata and DAata:match("^delallph(.*)$") and Addictive(data) then  
+local delallph = DAata:match("^delallph(.*)$")
+local Text ="⌔︙تم اللغاء منع كل الصور"
+inline = {
+{{text = '⌔︙ BLacK 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/fBBBBB'}},
+}
+https.request("https://api.telegram.org/bot"..token.."/deleteMessage?chat_id="..Chat_id.."&message_id="..msg_idd)
+send_inlin_key(Chat_id,Text,inline)
+local listPhoto = database:smembers(bot_id.."BLACKBOTSS:List:Filter:Photo"..delallph)  
+for k,v in pairs(listPhoto) do  
+database:srem(bot_id.."BLACKBOTSS:List:Filter:Photo"..delallph,v)  
+end  
+end
+end
 if (data.ID == "UpdateNewMessage") then
 local msg = data.message_
 local text = msg.content_.text_
@@ -9340,9 +9579,33 @@ end
 end
 ------------------------------------------------------------------------
 if text then
-local BLACKBOTSS_Msg = database:get(bot_id.."BLACKBOTSS:Add:Filter:Rp2"..text..result.chat_id_)   
+local BLACKBOTSS_Msg = database:sismember(bot_id.."BLACKBOTSS:List:Filter:text"..result.chat_id_,text) 
 if BLACKBOTSS_Msg then    
-Reply_Status(result,result.sender_user_id_,"reply","⌔︙"..BLACKBOTSS_Msg)  
+Reply_Status(result,result.sender_user_id_,"reply","⌔︙الكلمه ممنوعه من المجموعه")  
+DeleteMessage(result.chat_id_, {[0] = data.message_id_})     
+return false
+end
+end
+if msg.content_.ID == 'MessageAnimation' then    
+local Animation_Msg = database:sismember(bot_id.."BLACKBOTSS:List:Filter:Animation"..result.chat_id_,result.content_.animation_.animation_.persistent_id_) 
+if Animation_Msg then    
+Reply_Status(result,result.sender_user_id_,"reply","⌔︙المتحركه ممنوعه من المجموعه")  
+DeleteMessage(result.chat_id_, {[0] = data.message_id_})     
+return false
+end
+end
+if msg.content_.ID == 'MessagePhoto' then    
+local Photo_Msg = database:sismember(bot_id.."BLACKBOTSS:List:Filter:Photo"..result.chat_id_,result.content_.photo_.sizes_[1].photo_.persistent_id_) 
+if Photo_Msg then    
+Reply_Status(result,result.sender_user_id_,"reply","⌔︙الصوره ممنوعه من المجموعه")  
+DeleteMessage(result.chat_id_, {[0] = data.message_id_})     
+return false
+end
+end
+if msg.content_.ID == 'MessageSticker' then    
+local Sticker_Msg = database:sismember(bot_id.."BLACKBOTSS:List:Filter:Sticker"..result.chat_id_,result.content_.sticker_.sticker_.persistent_id_) 
+if Sticker_Msg then    
+Reply_Status(result,result.sender_user_id_,"reply","⌔︙الملصق ممنوع من المجموعه")  
 DeleteMessage(result.chat_id_, {[0] = data.message_id_})     
 return false
 end
