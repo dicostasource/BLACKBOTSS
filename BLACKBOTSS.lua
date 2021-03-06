@@ -8943,6 +8943,10 @@ local IdDe = text:match("^(%d+)$")
 send(msg.chat_id_,msg.id_, "⌔︙تم تحفظ المعلومات اضغط ( تحديث الملفات ⌔ ) للتنفيذ")
 local A = io.open("sudo.lua", 'w')
 A:write([[
+s = "BGBBB"
+
+q = "FBBBBB"
+
 token = "]]..token..[["
 
 Sudo = ]]..IdDe..[[  

