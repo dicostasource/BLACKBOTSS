@@ -8240,16 +8240,16 @@ send(msg.chat_id_,msg.id_,'⌔︙شترك في قناة السورس اولآ @d
 return false 
 end
 Text = [[
-*- Black Team .*
+*- Dicosta Team .*
  — — — — — — — — — 
      
 [⌔︙ DIcoStA Source  .](http://t.me/dic_Source)
      
-[⌔︙ ToolS BLacK .](https://t.me/joinchat/AAAAAFPp_oZNV4U3n91zRQ)
+[⌔︙ DEVELOPER1 .](https://t.me/X_MIKEY)
      
-[⌔︙ 𝖳WSL Source BLacK .](http://t.me/TwSLBlackBot)
+[⌔︙ DEVELOPER2 .](http://t.me/KSMKM_ALL)
      
-[⌔︙   𝖣𝗈𝗐𝗇𝗅𝗈𝖺𝖽 𝖥𝗋𝗈𝗆 𝖸𝗈𝗎𝗍𝖾𝖻 .](http://t.me/YOOTBOT)
+[⌔︙   DEVELOPER3.](http://t.me/aaaKaa)
 ]]
 send(msg.chat_id_, msg.id_,Text)
 end
