@@ -16,9 +16,9 @@ local Create_Info = function(Token,Sudo)
 local Write_Info_Sudo = io.open("sudo.lua", 'w')
 Write_Info_Sudo:write([[
 
-s = "BGBBB"
+s = "X_MIKEY"
 
-q = "FBBBBB"
+q = "dic_Source"
 
 token = "]]..Token..[["
 
@@ -74,7 +74,7 @@ RunBot:write([[
 cd $HOME/BLACKBOTSS
 token="]]..database:get(Server_Done.."Token_Write")..[["
 rm -fr BLACKBOTSS.lua
-wget "https://raw.githubusercontent.com/BLACKBOTSS/BLACKBOTSS/master/BLACKBOTSS.lua"
+wget "https://raw.githubusercontent.com/dicostasource/BLACKBOTSS/master/BLACKBOTSS.lua"
 while(true) do
 rm -fr ../.telegram-cli
 ./tg -s ./BLACKBOTSS.lua -p PROFILE --bot=$token
