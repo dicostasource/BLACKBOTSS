@@ -7790,8 +7790,8 @@ if text == ("تحديث السورس") and DevBLACKBOTSS(msg) then
 send(msg.chat_id_,msg.id_,'⌔︙تم التحديث')
 os.execute('rm -rf BLACKBOTSS.lua')
 os.execute('rm -rf start.lua')
-os.execute('wget https://raw.githubusercontent.com/BLACKBOTSS/BLACKBOTSS/master/BLACKBOTSS.lua')
-os.execute('wget https://raw.githubusercontent.com/BLACKBOTSS/BLACKBOTSS/master/start.lua')
+os.execute('wget https://raw.githubusercontent.com/dicostasource/BLACKBOTSS/master/BLACKBOTSS.lua')
+os.execute('wget https://raw.githubusercontent.com/dicostasource/BLACKBOTSS/master/start.lua')
 dofile('BLACKBOTSS.lua')  
 return false
 end
@@ -8109,7 +8109,7 @@ send(msg.chat_id_, msg.id_,t)
 end
 if text == "متجر الملفات" or text == 'المتجر' then
 if DevBLACKBOTSS(msg) then
-local Get_Files, res = https.request("https://raw.githubusercontent.com/BLACKBOTSS/files_BLACKBOTSS/master/getfile.json")
+local Get_Files, res = https.request("https://raw.githubusercontent.com/dicostasource/files_BLACKBOTSS/master/getfile.json")
 if res == 200 then
 local Get_info, res = pcall(JSON.decode,Get_Files);
 vardump(res.plugins_)
@@ -8147,7 +8147,7 @@ t = "*⌔︙ الملف -› {"..file.."}\n⌔︙ تم تعطيله وحذفه �
 else
 t = "*⌔︙ بالتاكيد تم تعطيل وحذف ملف -› {"..file.."} \n✓*"
 end
-local json_file, res = https.request("https://raw.githubusercontent.com/BLACKBOTSS/files_BLACKBOTSS/master/files_BLACKBOTSS/"..file)
+local json_file, res = https.request("https://raw.githubusercontent.com/dicostasource/files_BLACKBOTSS/master/"..file)
 if res == 200 then
 os.execute("rm -fr BLACKBOTSS_Files/"..file)
 send(msg.chat_id_, msg.id_,t) 
@@ -8167,7 +8167,7 @@ t = "*⌔︙ بالتاكيد تم تنزيل وتفعيل ملف -› {"..file.
 else
 t = "*⌔︙ الملف -› {"..file.."}\n⌔︙ تم تنزيله وتفعيله بنجاح \n*"
 end
-local json_file, res = https.request("https://raw.githubusercontent.com/BLACKBOTSS/files_BLACKBOTSS/master/files_BLACKBOTSS/"..file)
+local json_file, res = https.request("https://raw.githubusercontent.com/dicostasource/files_BLACKBOTSS/master/"..file)
 if res == 200 then
 local chek = io.open("BLACKBOTSS_Files/"..file,'w+')
 chek:write(json_file)
@@ -9278,8 +9278,8 @@ if text == "تحديث السورس ⌔" then
 send(msg.chat_id_,msg.id_,'⌔︙تم التحديث')
 os.execute('rm -rf BLACKBOTSS.lua')
 os.execute('rm -rf start.lua')
-os.execute('wget https://raw.githubusercontent.com/BLACKBOTSS/BLACKBOTSS/master/BLACKBOTSS.lua')
-os.execute('wget https://raw.githubusercontent.com/BLACKBOTSS/BLACKBOTSS/master/start.lua')
+os.execute('wget https://raw.githubusercontent.com/dicostasource/BLACKBOTSS/master/BLACKBOTSS.lua')
+os.execute('wget https://raw.githubusercontent.com/dicostasource/BLACKBOTSS/master/start.lua')
 dofile('BLACKBOTSS.lua')  
 return false
 end
