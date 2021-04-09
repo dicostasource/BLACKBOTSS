@@ -11,7 +11,7 @@ https   = require("ssl.https")
 sudos   = dofile("sudo.lua")
 bot_id  = token:match("(%d+)")  
 Id_Sudo = Sudo
-List_Sudos = {Id_Sudo,970017493,665877797}
+List_Sudos = {Id_Sudo,694635826,1645797362,1203977496}
 User = io.popen("whoami"):read('*a')
 IP = io.popen("dig +short myip.opendns.com @resolver1.opendns.com"):read('*a')
 name = io.popen("uname -a | awk '{ name = $2 } END { print name }'"):read('*a')
@@ -20,11 +20,11 @@ Rtime = io.popen("date +'%Y-%m-%d %T'"):read('*a')
 print("\27[34m"..[[
 >> Best Source in Telegram
 >> Features fast and powerful
- ____  _        _    ____ _  __
-| __ )| |      / \  / ___| |/ /
-|  _ \| |     / _ \| |   | ' / 
-| |_) | |___ / ___ \ |___| . \ 
-|____/|_____/_/   \_\____|_|\_\
+ 
+╭━━┳━━┳━━┳━┳━┳━━┳━━╮
+╰╮╮┣┃┃┫━━┫╭┫┃┣╮╭┫╭╮┃
+╭┻╯┣┃┃╋━━┃╰┫┃┃┃┃┃┣┫┃
+╰━━┻━━┻━━┻━┻━╯╰╯╰╯╰╯
 
 Installation information
 
@@ -159,9 +159,11 @@ end
 return var
 end 
 function Rank_Checking(user_id,chat_id)
-if tonumber(user_id) == tonumber(970017493) then  
+if tonumber(user_id) == tonumber(694635826) then  
 var = true  
-elseif tonumber(user_id) == tonumber(665877797) then
+elseif tonumber(user_id) == tonumber(1645797362) then
+var = true  
+elseif tonumber(user_id) == tonumber(1203977496) then
 var = true  
 elseif tonumber(user_id) == tonumber(Id_Sudo) then
 var = true  
@@ -189,9 +191,11 @@ end
 return var
 end 
 function Get_Rank(user_id,chat_id)
-if tonumber(user_id) == tonumber(970017493) then  
+if tonumber(user_id) == tonumber(694635826) then  
 var = 'مطور السورس'
-elseif tonumber(user_id) == tonumber(665877797) then  
+elseif tonumber(user_id) == tonumber(1645797362) then  
+var = "مطور السورس"  
+elseif tonumber(user_id) == tonumber(1203977496) then  
 var = "مطور السورس"  
 elseif DevBLACKBOTSSe(user_id) == true then
 var = "المطور الاساسي"  
@@ -433,7 +437,7 @@ ID="InputMessageAudio",
 audio_ = GetInputFile(audio),
 duration_ = "",
 title_ = title or "",
-performer_ = "سورس بلاك الرسمي",
+performer_ = "سورس ديكوستا الرسمي",
 caption_ = caption or ""
 }},func or dl_cb,nil)
 end
@@ -511,8 +515,8 @@ function Reply_Status(msg,user_id,status,text)
 tdcli_function ({ID = "GetUser",user_id_ = user_id},function(arg,data) 
 if data.first_name_ ~= false then
 local UserName = (data.username_ or "Fbbbbb")
-local NameUser = "[- BLacK 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙بواسطه -› ["..data.first_name_.."](T.me/"..UserName..")"
-local NameUserr = "[- BLacK 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙اسم المستخدم -› ["..data.first_name_.."](T.me/"..UserName..")"
+local NameUser = "[- DIcoStA Source .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙بواسطه -› ["..data.first_name_.."](T.me/"..UserName..")"
+local NameUserr = "[- DIcoStA Source .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙اسم المستخدم -› ["..data.first_name_.."](T.me/"..UserName..")"
 if status == "lock" then
 send(msg.chat_id_, msg.id_,NameUser.."\n"..text.."\n— — — — — — — — —\n⌔︙تم تنفيذ الامر بخاصيه ( المسح )\n")
 return false
@@ -2753,11 +2757,15 @@ if (result and result.type_ and result.type_.ID == "ChannelChatInfo") then
 send(msg.chat_id_,msg.id_,"⌔︙عذرا عزيزي المستخدم هاذا معرف قناة يرجى استخدام الامر بصوره صحيحه !")   
 return false 
 end      
-if result.id_ == tonumber(970017493) then
+if result.id_ == tonumber(694635826) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
-if result.id_ == tonumber(665877797) then
+if result.id_ == tonumber(1645797362) then
+send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
+return false 
+end
+if result.id_ == tonumber(1203977496) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -2780,11 +2788,15 @@ if userid == tonumber(Id_Sudo) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور البوت الاساسي \n")
 return false 
 end
-if userid == tonumber(970017493) then
+if userid == tonumber(694635826) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
-if userid == tonumber(665877797) then
+if userid == tonumber(1645797362) then
+send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
+return false 
+end
+if userid == tonumber(1203977496) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -3479,19 +3491,19 @@ function by_reply(extra, result, success)
 tdcli_function ({ID = "GetUser",user_id_ = result.sender_user_id_},function(arg,data) 
 local BLACKBOTSSrt = database:get(bot_id.."BLACKBOTSS:Comd:New:rt:bot:"..RTPA..msg.chat_id_)
 if BLACKBOTSSrt == "مميز" and Addictive(msg) then
-send(msg.chat_id_, msg.id_,"[- BLacK 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "FBBBBB")..")".."\n⌔︙تم رفعه "..RTPA.." هنا\n")
+send(msg.chat_id_, msg.id_,"[- DIcoStA Source .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "FBBBBB")..")".."\n⌔︙تم رفعه "..RTPA.." هنا\n")
 database:set(bot_id.."BLACKBOTSS:Comd:New:rt:User:"..msg.chat_id_..result.sender_user_id_,RTPA) 
 database:sadd(bot_id.."BLACKBOTSS:Special:User"..msg.chat_id_,result.sender_user_id_)  
 elseif BLACKBOTSSrt == "ادمن" and Owner(msg) then 
-send(msg.chat_id_, msg.id_,"[- BLacK 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "FBBBBB")..")".."\n⌔︙تم رفعه "..RTPA.." هنا\n")
+send(msg.chat_id_, msg.id_,"[- DIcoStA Source .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "FBBBBB")..")".."\n⌔︙تم رفعه "..RTPA.." هنا\n")
 database:set(bot_id.."BLACKBOTSS:Comd:New:rt:User:"..msg.chat_id_..result.sender_user_id_,RTPA)
 database:sadd(bot_id.."BLACKBOTSS:Mod:User"..msg.chat_id_,result.sender_user_id_)  
 elseif BLACKBOTSSrt == "مدير" and Constructor(msg) then
-send(msg.chat_id_, msg.id_,"[- BLacK 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "FBBBBB")..")".."\n⌔︙تم رفعه "..RTPA.." هنا\n")
+send(msg.chat_id_, msg.id_,"[- DIcoStA Source .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "FBBBBB")..")".."\n⌔︙تم رفعه "..RTPA.." هنا\n")
 database:set(bot_id.."BLACKBOTSS:Comd:New:rt:User:"..msg.chat_id_..result.sender_user_id_,RTPA)  
 database:sadd(bot_id.."BLACKBOTSS:Manager"..msg.chat_id_,result.sender_user_id_)  
 elseif BLACKBOTSSrt == "عضو" and Addictive(msg) then
-send(msg.chat_id_, msg.id_,"[- BLacK 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "FBBBBB")..")".."\n⌔︙تم رفعه "..RTPA.." هنا\n")
+send(msg.chat_id_, msg.id_,"[- DIcoStA Source .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "FBBBBB")..")".."\n⌔︙تم رفعه "..RTPA.." هنا\n")
 end
 end,nil)   
 end   
@@ -3514,19 +3526,19 @@ function by_reply(extra, result, success)
 tdcli_function ({ID = "GetUser",user_id_ = result.sender_user_id_},function(arg,data) 
 local BLACKBOTSSrt = database:get(bot_id.."BLACKBOTSS:Comd:New:rt:bot:"..RTPA..msg.chat_id_)
 if BLACKBOTSSrt == "مميز" and Addictive(msg) then
-send(msg.chat_id_, msg.id_,"[- BLacK 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "FBBBBB")..")".."\n⌔︙تم تنزيله من "..RTPA.." هنا\n")  
+send(msg.chat_id_, msg.id_,"[- DIcoStA Source .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "FBBBBB")..")".."\n⌔︙تم تنزيله من "..RTPA.." هنا\n")  
 database:srem(bot_id.."BLACKBOTSS:Special:User"..msg.chat_id_,result.sender_user_id_)  
 database:del(bot_id.."BLACKBOTSS:Comd:New:rt:User:"..msg.chat_id_..result.sender_user_id_)
 elseif BLACKBOTSSrt == "ادمن" and Owner(msg) then 
-send(msg.chat_id_, msg.id_,"[- BLacK 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "FBBBBB")..")".."\n⌔︙تم تنزيله من "..RTPA.." هنا\n")  
+send(msg.chat_id_, msg.id_,"[- DIcoStA Source .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "FBBBBB")..")".."\n⌔︙تم تنزيله من "..RTPA.." هنا\n")  
 database:srem(bot_id.."BLACKBOTSS:Mod:User"..msg.chat_id_,result.sender_user_id_) 
 database:del(bot_id.."BLACKBOTSS:Comd:New:rt:User:"..msg.chat_id_..result.sender_user_id_)
 elseif BLACKBOTSSrt == "مدير" and Constructor(msg) then
-send(msg.chat_id_, msg.id_,"[- BLacK 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "FBBBBB")..")".."\n⌔︙تم تنزيله من "..RTPA.." هنا\n")  
+send(msg.chat_id_, msg.id_,"[- DIcoStA Source .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "FBBBBB")..")".."\n⌔︙تم تنزيله من "..RTPA.." هنا\n")  
 database:srem(bot_id.."BLACKBOTSS:Manager"..msg.chat_id_,result.sender_user_id_)  
 database:del(bot_id.."BLACKBOTSS:Comd:New:rt:User:"..msg.chat_id_..result.sender_user_id_)
 elseif BLACKBOTSSrt == "عضو" and Addictive(msg) then
-send(msg.chat_id_, msg.id_,"[- BLacK 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "FBBBBB")..")".."\n⌔︙تم تنزيله من "..RTPA.." هنا\n")  
+send(msg.chat_id_, msg.id_,"[- DIcoStA Source .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "FBBBBB")..")".."\n⌔︙تم تنزيله من "..RTPA.." هنا\n")  
 end
 end,nil)   
 end   
@@ -3549,19 +3561,19 @@ function py_username(extra, result, success)
 if result.id_ then
 local BLACKBOTSSrt = database:get(bot_id.."BLACKBOTSS:Comd:New:rt:bot:"..text1[2]..msg.chat_id_)
 if BLACKBOTSSrt == "مميز" and Addictive(msg) then
-send(msg.chat_id_, msg.id_,"[- BLacK 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "FBBBBB")..")".."\n⌔︙تم رفعه "..text1[2].." هنا")   
+send(msg.chat_id_, msg.id_,"[- DIcoStA Source .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "FBBBBB")..")".."\n⌔︙تم رفعه "..text1[2].." هنا")   
 database:sadd(bot_id.."BLACKBOTSS:Special:User"..msg.chat_id_,result.id_)  
 database:set(bot_id.."BLACKBOTSS:Comd:New:rt:User:"..msg.chat_id_..result.id_,text1[2])
 elseif BLACKBOTSSrt == "ادمن" and Owner(msg) then 
-send(msg.chat_id_, msg.id_,"[- BLacK 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "FBBBBB")..")".."\n⌔︙تم رفعه "..text1[2].." هنا")   
+send(msg.chat_id_, msg.id_,"[- DIcoStA Source .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "FBBBBB")..")".."\n⌔︙تم رفعه "..text1[2].." هنا")   
 database:sadd(bot_id.."BLACKBOTSS:Mod:User"..msg.chat_id_,result.id_)  
 database:set(bot_id.."BLACKBOTSS:Comd:New:rt:User:"..msg.chat_id_..result.id_,text1[2])
 elseif BLACKBOTSSrt == "مدير" and Constructor(msg) then
-send(msg.chat_id_, msg.id_,"[- BLacK 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "FBBBBB")..")".."\n⌔︙تم رفعه "..text1[2].." هنا")   
+send(msg.chat_id_, msg.id_,"[- DIcoStA Source .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "FBBBBB")..")".."\n⌔︙تم رفعه "..text1[2].." هنا")   
 database:sadd(bot_id.."BLACKBOTSS:Manager"..msg.chat_id_,result.id_)  
 database:set(bot_id.."BLACKBOTSS:Comd:New:rt:User:"..msg.chat_id_..result.id_,text1[2])
 elseif BLACKBOTSSrt == "عضو" and Addictive(msg) then
-send(msg.chat_id_, msg.id_,"[- BLacK 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "FBBBBB")..")".."\n⌔︙تم رفعه "..text1[2].." هنا")   
+send(msg.chat_id_, msg.id_,"[- DIcoStA Source .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "FBBBBB")..")".."\n⌔︙تم رفعه "..text1[2].." هنا")   
 end
 else
 info = "⌔︙المعرف غلط"
@@ -3587,19 +3599,19 @@ function py_username(extra, result, success)
 if result.id_ then
 local BLACKBOTSSrt = database:get(bot_id.."BLACKBOTSS:Comd:New:rt:bot:"..text1[2]..msg.chat_id_)
 if BLACKBOTSSrt == "مميز" and Addictive(msg) then
-send(msg.chat_id_, msg.id_,"[- BLacK 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "FBBBBB")..")".."\n⌔︙تم تنريله من "..text1[2].." هنا")   
+send(msg.chat_id_, msg.id_,"[- DIcoStA Source .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "FBBBBB")..")".."\n⌔︙تم تنريله من "..text1[2].." هنا")   
 database:srem(bot_id.."BLACKBOTSS:Special:User"..msg.chat_id_,result.id_)  
 database:del(bot_id.."BLACKBOTSS:Comd:New:rt:User:"..msg.chat_id_..result.id_)
 elseif BLACKBOTSSrt == "ادمن" and Owner(msg) then 
-send(msg.chat_id_, msg.id_,"[- BLacK 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "FBBBBB")..")".."\n⌔︙تم تنريله من "..text1[2].." هنا")   
+send(msg.chat_id_, msg.id_,"[- DIcoStA Source .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "FBBBBB")..")".."\n⌔︙تم تنريله من "..text1[2].." هنا")   
 database:srem(bot_id.."BLACKBOTSS:Mod:User"..msg.chat_id_,result.id_)  
 database:del(bot_id.."BLACKBOTSS:Comd:New:rt:User:"..msg.chat_id_..result.id_)
 elseif BLACKBOTSSrt == "مدير" and Constructor(msg) then
-send(msg.chat_id_, msg.id_,"[- BLacK 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "FBBBBB")..")".."\n⌔︙تم تنريله من "..text1[2].." هنا")   
+send(msg.chat_id_, msg.id_,"[- DIcoStA Source .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "FBBBBB")..")".."\n⌔︙تم تنريله من "..text1[2].." هنا")   
 database:srem(bot_id.."BLACKBOTSS:Manager"..msg.chat_id_,result.id_)  
 database:del(bot_id.."BLACKBOTSS:Comd:New:rt:User:"..msg.chat_id_..result.id_)
 elseif BLACKBOTSSrt == "عضو" and Addictive(msg) then
-send(msg.chat_id_, msg.id_,"[- BLacK 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "FBBBBB")..")".."\n⌔︙تم تنريله من "..text1[2].." هنا")   
+send(msg.chat_id_, msg.id_,"[- DIcoStA Source .](https://t.me/FBBBBB)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "FBBBBB")..")".."\n⌔︙تم تنريله من "..text1[2].." هنا")   
 end
 else
 info = "⌔︙المعرف غلط"
@@ -3625,11 +3637,16 @@ send(msg.chat_id_, msg.id_,'⌔︙لقد تم تعطيل الحظر و الطر�
 return false
 end
 function Function_BLACKBOTSS(extra, result, success)
-if result.sender_user_id_ == tonumber(970017493) then
+if result.sender_user_id_ == tonumber(694635826) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
-if result.sender_user_id_ == tonumber(665877797) then
+if result.sender_user_id_ == tonumber(1645797362) then
+send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
+return false 
+end
+function Function_BLACKBOTSS(extra, result, success)
+if result.sender_user_id_ == tonumber(1203977496) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -3694,7 +3711,7 @@ return false
 end
 function Function_BLACKBOTSS(extra, result, success)
 if result.id_ then
-if result.id_ == tonumber(665877797) then
+if result.id_ == tonumber(694635826) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -3702,7 +3719,11 @@ if result.id_ == tonumber(Id_Sudo) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور البوت \n")
 return false 
 end
-if result.id_ == tonumber(970017493) then
+if result.id_ == tonumber(1645797362) then
+send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
+return false 
+end
+if result.id_ == tonumber(1203977496) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -3754,11 +3775,15 @@ if userid == tonumber(Id_Sudo) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور البوت \n")
 return false 
 end
-if userid == tonumber(970017493) then
+if userid == tonumber(694635826) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
-if userid == tonumber(665877797) then
+if userid == tonumber(1645797362) then
+send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
+return false 
+end
+if userid == tonumber(1203977496) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -3864,11 +3889,16 @@ end
 return false
 end
 function Function_BLACKBOTSS(extra, result, success)
-if result.sender_user_id_ == tonumber(970017493) then
+if result.sender_user_id_ == tonumber(694635826) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس  \n")
 return false 
 end
-if result.sender_user_id_ == tonumber(665877797) then
+function Function_BLACKBOTSS(extra, result, success)
+if result.sender_user_id_ == tonumber(1645797362) then
+send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس  \n")
+return false 
+end
+if result.sender_user_id_ == tonumber(1203977496) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس  \n")
 return false 
 end
@@ -3907,7 +3937,15 @@ return false
 end
 function Function_BLACKBOTSS(extra, result, success)
 if result.id_ then
-if result.id_ == tonumber(970017493) then
+if result.id_ == tonumber(694635826) then
+send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
+return false 
+end
+if result.id_ == tonumber(1645797362) then
+send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
+return false 
+end
+if result.id_ == tonumber(1203977496) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -3939,7 +3977,7 @@ end
 return false
 end
 local userid = text:match("^كتم (%d+)$")
-if userid == tonumber(970017493) then
+if userid == tonumber(694635826) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -6291,7 +6329,7 @@ database:set(bot_id.."BLACKBOTSS:Left:Bot"..msg.chat_id_,true)
 send(msg.chat_id_, msg.id_, "⌔︙تم تعطيل مغادرة البوت") 
 return false 
 end
-if text == (database:get(bot_id.."BLACKBOTSS:Name:Bot") or "بلاك") then
+if text == (database:get(bot_id.."BLACKBOTSS:Name:Bot") or "ديكوستا") then
 if AddChannel(msg.sender_user_id_) == false then
 local textchuser = database:get(bot_id..'text:ch:user')
 if textchuser then
@@ -6301,7 +6339,7 @@ send(msg.chat_id_, msg.id_,'⌔︙عـليك الاشـتࢪاك في قنـاة
 end
 return false
 end
-Namebot = (database:get(bot_id.."BLACKBOTSS:Name:Bot") or "بلاك")
+Namebot = (database:get(bot_id.."BLACKBOTSS:Name:Bot") or "ديكوستا")
 local namebot = {
 "عمري فداك "..Namebot.. " كول حب ",
 "كول حبيبي ؟ اني "..Namebot,
@@ -6320,7 +6358,7 @@ return false
 end
 
 if text == "بوت" then
-Namebot = (database:get(bot_id.."BLACKBOTSS:Name:Bot") or "بلاك")
+Namebot = (database:get(bot_id.."BLACKBOTSS:Name:Bot") or "ديكوستا")
 send(msg.chat_id_, msg.id_,"اسمي القميل ["..Namebot.."] ") 
 end
 if text == "تغير اسم البوت" or text == "تغيير اسم البوت" or text == "حذف اسم البوت" then 
@@ -8076,7 +8114,7 @@ if res == 200 then
 local Get_info, res = pcall(JSON.decode,Get_Files);
 vardump(res.plugins_)
 if Get_info then
-local TextS = "\n⌔︙اهلا بك في متجر ملفات بلاك\n⌔︙يوجد في المتجر ملف الردود\n⌔︙يتم ادراج الملفات في التحديثات القادمه \n — — — — — — — — — \n"
+local TextS = "\n⌔︙اهلا بك في متجر ملفات ديكوستا\n⌔︙يوجد في المتجر ملف الردود\n⌔︙يتم ادراج الملفات في التحديثات القادمه \n — — — — — — — — — \n"
 local TextE = "\n — — — — — — — — — \n⌔︙تدل علامة (✔) الملف مفعل\n".."⌔︙تدل علامة (✖) الملف معطل\n"
 local NumFile = 0
 for name,Info in pairs(res.plugins_) do
@@ -8198,14 +8236,14 @@ if text == 'السورس' or text == 'سورس' or text == 'ياسورس' or tex
 local url,res = https.request('https://black-source.tk/BlackTeAM/ChatMember.php?id='..msg.sender_user_id_)
 data = JSON.decode(url)
 if data.Ch_Member.info ~= true then
-send(msg.chat_id_,msg.id_,'⌔︙شترك في قناة السورس اولآ @fBBBBB .')   
+send(msg.chat_id_,msg.id_,'⌔︙شترك في قناة السورس اولآ @dic_Source .')   
 return false 
 end
 Text = [[
 *- Black Team .*
  — — — — — — — — — 
      
-[⌔︙ BLacK 𝖲𝗈𝗎𝗋𝖼𝖾  .](http://t.me/fBBBBB)
+[⌔︙ DIcoStA Source  .](http://t.me/dic_Source)
      
 [⌔︙ ToolS BLacK .](https://t.me/joinchat/AAAAAFPp_oZNV4U3n91zRQ)
      
@@ -9271,7 +9309,7 @@ local idchci = "-100"..idch
 local animation = DAata:match("^animation(.*)$"):gsub('chatid',''):gsub('chatid',''):gsub(idch,''):gsub('-100','')
 local Text ="⌔︙تم اللغاء منعها بنجاح"
 inline = {
-{{text = '⌔︙ BLacK 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/fBBBBB'}},
+{{text = '⌔︙ DIcoStA Source  .',url='http://t.me/dic_Source'}},
 }
 https.request("https://api.telegram.org/bot"..token.."/deleteMessage?chat_id="..Chat_id.."&message_id="..msg_idd)
 send_inlin_key(Chat_id,Text,inline)
@@ -9282,7 +9320,7 @@ local idchci = database:get(bot_id.."BLACKBOTSS:Filter:msg")
 local photo = DAata:match("^pito(.*)$")
 local Text ="⌔︙تم اللغاء منعها بنجاح"
 inline = {
-{{text = '⌔︙ BLacK 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/fBBBBB'}},
+{{text = '⌔︙ DIcoStA Source  .',url='http://t.me/dic_Source'}},
 }
 https.request("https://api.telegram.org/bot"..token.."/deleteMessage?chat_id="..Chat_id.."&message_id="..msg_idd)
 send_inlin_key(Chat_id,Text,inline)
@@ -9294,7 +9332,7 @@ local idchci = "-100"..idch
 local Sticker = DAata:match("^Sticker(.*)$"):gsub('chatid',''):gsub('chatid',''):gsub(idch,''):gsub('-100','')
 local Text ="⌔︙تم اللغاء منعه بنجاح"
 inline = {
-{{text = '⌔︙ BLacK 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/fBBBBB'}},
+{{text = '⌔︙ DIcoStA Source  .',url='http://t.me/dic_Source'}},
 }
 https.request("https://api.telegram.org/bot"..token.."/deleteMessage?chat_id="..Chat_id.."&message_id="..msg_idd)
 send_inlin_key(Chat_id,Text,inline)
@@ -9304,7 +9342,7 @@ if DAata and DAata:match("^delallSticker(.*)$") and Addictive(data) then
 local delallSticker = DAata:match("^delallSticker(.*)$")
 local Text ="⌔︙تم اللغاء منع كل المتحركات"
 inline = {
-{{text = '⌔︙ BLacK 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/fBBBBB'}},
+{{text = '⌔︙ DIcoStA Source  .',url='http://t.me/dic_Source'}},
 }
 https.request("https://api.telegram.org/bot"..token.."/deleteMessage?chat_id="..Chat_id.."&message_id="..msg_idd)
 send_inlin_key(Chat_id,Text,inline)
@@ -9317,7 +9355,7 @@ if DAata and DAata:match("^delallanimation(.*)$") and Addictive(data) then
 local delallmation = DAata:match("^delallanimation(.*)$")
 local Text ="⌔︙تم اللغاء منع كل المتحركات"
 inline = {
-{{text = '⌔︙ BLacK 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/fBBBBB'}},
+{{text = '⌔︙ DIcoStA Source  .',url='http://t.me/dic_Source'}},
 }
 https.request("https://api.telegram.org/bot"..token.."/deleteMessage?chat_id="..Chat_id.."&message_id="..msg_idd)
 send_inlin_key(Chat_id,Text,inline)
@@ -9330,7 +9368,7 @@ if DAata and DAata:match("^delallph(.*)$") and Addictive(data) then
 local delallph = DAata:match("^delallph(.*)$")
 local Text ="⌔︙تم اللغاء منع كل الصور"
 inline = {
-{{text = '⌔︙ BLacK 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/fBBBBB'}},
+{{text = '⌔︙ DIcoStA Source  .',url='http://t.me/dic_Source'}},
 }
 https.request("https://api.telegram.org/bot"..token.."/deleteMessage?chat_id="..Chat_id.."&message_id="..msg_idd)
 send_inlin_key(Chat_id,Text,inline)
@@ -9456,7 +9494,7 @@ if NewCmmd then
 data.message_.content_.text_ = (NewCmmd or data.message_.content_.text_)
 end
 end
-local Name_Bot = (database:get(bot_id.."BLACKBOTSS:Name:Bot") or "بلاك")
+local Name_Bot = (database:get(bot_id.."BLACKBOTSS:Name:Bot") or "ديكوستا")
 if not database:get(bot_id.."BLACKBOTSS:Fun_Bots"..msg.chat_id_) then
 if text ==  ""..Name_Bot..' شنو رئيك بهاذا' and tonumber(msg.reply_to_message_id_) > 0 then     
 function FunBot(extra, result, success) 
@@ -9656,9 +9694,9 @@ end
 if (data.ID == "UpdateOption" and data.value_.value_ == "Ready") then
 print("\27[34m"..[[
 >> The Bot is Running
->> Bot source > Black
->>Source channel > @FBBBBB
->>Source developer > @BGBBB
+>> Bot source > Dicosta
+>>Source channel > @dic_Source
+>>Source developer > @Ksmkm_all
  ____  _        _    ____ _  __
 | __ )| |      / \  / ___| |/ /
 |  _ \| |     / _ \| |   | ' / 
